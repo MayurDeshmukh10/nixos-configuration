@@ -24,6 +24,7 @@
 	git
 	neofetch
 	powertop
+	brightnessctl # for brightness control
 	kanshi # for display configuration
 	zoom-us
 	font-awesome
