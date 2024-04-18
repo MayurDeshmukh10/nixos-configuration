@@ -39,6 +39,7 @@
 		dunst
 		libnotify
 		networkmanagerapplet
+		wlogout
 
 		(waybar.overrideAttrs (oldAttrs: {
 			mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
