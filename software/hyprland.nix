@@ -36,10 +36,14 @@
 		hyprpaper
 		rofi-wayland
 		waybar
-		dunst
+		#dunst
 		libnotify
 		networkmanagerapplet
 		wlogout
+		swaynotificationcenter
+		slurp
+		grim
+		wl-clipboard
 
 		(waybar.overrideAttrs (oldAttrs: {
 			mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
