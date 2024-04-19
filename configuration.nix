@@ -76,7 +76,7 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.desktopManager.plasma5.enable = false;
 
   # Configure keymap in X11
   services.xserver = {
@@ -121,6 +121,9 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # GVfs for Nautilus
+  services.gvfs.enable = true;
 
   # Allow packages from unstable
 
