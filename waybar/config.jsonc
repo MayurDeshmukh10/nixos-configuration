@@ -15,8 +15,8 @@
 // positions generated based on config.ctl //
 
 	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/cliphist","custom/wbar","custom/theme","custom/wallchange","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","","custom/padd"],
-	"modules-center": ["custom/padd","custom/l_end","idle_inhibitor","clock","custom/r_end","custom/padd"],
-	"modules-right": ["custom/padd","custom/l_end","tray","battery","custom/r_end","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","custom/keybindhint","custom/r_end","custom/padd"],
+	"modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","clock","custom/r_end","custom/padd"],
+	"modules-right": ["custom/padd","custom/l_end","tray","battery","custom/r_end","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","cpu", "memory", "temperature","custom/r_end","custom/padd", "custom/l_end", "custom/spotify","custom/notification","custom/r_end", "custom/padd"],
 
 
 // sourced from modules based on config.ctl //
@@ -93,7 +93,7 @@
 	},
 
     "custom/spotify": {
-        "exec": "/usr/bin/env python3 ~/.config/waybar/modules/mediaplayer.py --player spotify",
+        //"exec": "/usr/bin/env python3 ~/.config/waybar/modules/mediaplayer.py --player spotify",
         "format": " {}",
         "rotate": 0,
         "return-type": "json",
@@ -119,6 +119,7 @@
     "clock": {
         "format": "{:%I:%M %p}",
         "rotate": 0,
+	"timezones": ["Europe/Berlin", "Asia/Kolkata"],
         "format-alt": "{:%R 󰃭 %d·%m·%y}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "calendar": {
@@ -136,8 +137,8 @@
             "on-click-right": "mode",
             "on-click-forward": "tz_up",
             "on-click-backward": "tz_down",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
+            "on-scroll-up": "tz_up",
+            "on-scroll-down": "tz_down"
         }
     },
 
@@ -181,7 +182,7 @@
         "format-disconnected": "󰖪 ",
         "tooltip-format-disconnected": "Disconnected",
         "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
-        "interval": 2,
+        "interval": 2
     },
 
     "bluetooth": {
@@ -238,6 +239,75 @@
         "rotate": 0,
         "on-click": "keybinds_hint.sh"
     },
+
+    "custom/notification": {
+      "tooltip": true,
+      "format": "{} {icon}",
+      "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+   },
+
+   "hyprland/workspaces": {
+    "format": "{icon}",
+	"active-only": false,
+	"sort-by-number": false,
+	"on-click": "activate",
+	"all-outputs": false,
+	"format-icons": {
+    		"1": "",
+    		"2": "",
+    		"3": "",
+    		"4": "",
+    		"5": "",
+    		"6": "",
+    		"7": "",
+    		"8": "󰉋",
+    		"9": "󰙯",
+    		"10": "",
+    		"11": "󰅨",
+    		"12": ""
+	}
+   },
+
+   "cpu": {
+		  "format": "<span foreground='#b8bb26'>󰯳</span> {usage}%"
+  },
+  "memory": {
+		  "format": "<span foreground='#d65d9e'>󰍛</span> {}%",
+		  "interval": 1
+  },
+  "custom/gpu-util": {
+		  "exec": "./scripts/gpu-util",
+ 		  "format": "<span foreground='#67b0e8'>󰯿</span> {}",
+		  "interval": 1
+  },
+  "custom/gpu-temp": {
+		  "exec": "./scripts/gpu-temp",
+ 		  "format": "<span foreground='#e57474'></span> {}",
+		  "interval": 1
+  },
+  "temperature": {
+		  "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+		  "critical-threshold": 80,
+		  "format": "<span foreground='#83a598'></span> {temperatureC}°C",
+		  "interval": 1
+  },
+
+
 
 
 // modules for padding //
