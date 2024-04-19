@@ -10,6 +10,7 @@ nm-applet --indicator &
 waybar &
 #waybar -c ~/.config/waybar/themes/config -s ~/.config/waybar/themes/style.css &
 
-# dunst
-dunst
+# notification daemon
+#dunst
+swaync
 
