@@ -85,6 +85,7 @@ programs.zsh = {
     update_packages = "sudo nixos-rebuild switch --upgrade";
     packages_stable = "sudo vi /etc/nixos/software/packages.nix";
     packages_unstable = "sudo vi /etc/nixos/software/unstable.nix";
+    ml-env = "source ~/machine-learning-env/bin/activate";
   };
   history.size = 10000;
   history.path = "${config.xdg.dataHome}/zsh/history";
@@ -102,7 +103,7 @@ programs.zsh = {
   #  /etc/profiles/per-user/mayur/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    LD_LIBRARY_PATH= "$LD_LIBRARY:/nix/store/2zm8zhdjvf63vchky28z8z0s2c39acgw-glib-2.78.4/lib";
   };
 
   # Let Home Manager install and manage itself.
