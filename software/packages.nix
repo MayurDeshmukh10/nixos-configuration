@@ -13,6 +13,10 @@
         btop
         hyper
         lshw
+	libglibutil
+	glibc
+	glib
+	nix-index
         bluez
         home-manager
         zsh-autosuggestions
@@ -24,6 +28,7 @@
 	git
 	neofetch
 	powertop
+	cmake
 	okular
 	brightnessctl # for brightness control
 	kanshi # for display configuration
@@ -35,6 +40,16 @@
 	zoom-us
 	font-awesome
 	webcord # wayland working discord clone
+	openconnect # for cisco anyconnect VPN
+	obs-studio
+	inkscape
+	libgcc
+	qdirstat
+	libsForQt5.dolphin
+	unzip
+	ffmpeg_5-full
+	udiskie # Removable disk automounter
+
 
 	];
 }
