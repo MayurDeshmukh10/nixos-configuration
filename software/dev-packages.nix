@@ -3,6 +3,8 @@ let
   baseconfig = { allowUnfree = true; };
 in {
   environment.systemPackages = with pkgs; [
+	libgcc
+	jdk
 	python3
 	python311Packages.pip
   ];
