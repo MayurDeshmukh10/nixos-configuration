@@ -1,24 +1,17 @@
 { inputs, config, pkgs, ...}: 
 {
-	# TODO - setup this
-	#nix.settings = {
-	#	substituters = []
-	#	trusted-public-keys
-	#}
 
 	# configuration.nix
-  	nix.settings = {
-    		substituters = ["https://hyprland.cachix.org"];
-    		trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  	};
-
-	
+  	#nix.settings = {
+    	#	substituters = ["https://hyprland.cachix.org"];
+    	#	trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  	#};	
 
   	programs.hyprland = {
 		enable = true;
-		nvidiaPatches = true;
+		#nvidiaPatches = true;
 		xwayland.enable = true;
-		#package = pkgs.inputs.hyprland.packages.${pkgs.system}.hyprland;
+		package = pkgs.inputs.hyprland.packages.${pkgs.system}.hyprland;
 	};
 
 	services.greetd = {
@@ -31,6 +24,10 @@
 			};
 		};
 	};
+
+
+	security.pam.services.swaylock = {};
+
 	
 	environment.systemPackages = with pkgs; [
 		hyprpaper
@@ -44,6 +41,8 @@
 		slurp
 		grim
 		wl-clipboard
+		#hyprlock
+		wlsunset
 
 		(waybar.overrideAttrs (oldAttrs: {
 			mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   imports =
@@ -18,7 +18,14 @@
       ./hardware/nvidia-configuration.nix
     ];
 	
+ #programs.hyprland = {
+#		enable = true;
+#		nvidiaPatches = true;
+#		xwayland.enable = true;
+#		#package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+#	};
 
+  #catppuccin.flavour = "mocha";
  #programs.firefox = {
   #  enable = true;
    # package = pkgs.firefox;
@@ -68,14 +75,17 @@
   #boot.kernelParams = [ "i915.force_probe=<46a3>" ];
   #boot.kernelParams = [ "module_blacklist=i915" ];
   
+  # logind
+  services.logind.powerKey = "suspend";
+  services.logind.powerKeyLongPress = "poweroff";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver.enable = false;
 
   services.xserver.videoDrivers = ["nvidia"];
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.enable = false;
   services.xserver.desktopManager.plasma5.enable = false;
 
   # Configure keymap in X11
@@ -125,28 +135,6 @@
   # GVfs for Nautilus
   services.gvfs.enable = true;
 
-  # Allow packages from unstable
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
- # environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-#	zsh
-#	vim
-#	google-chrome
- #       thunderbird
- #       spotify
- #       htop
- #       nvtop-nvidia
-#	appimage-run
-#	vscode
-#	hyper
-#	lshw
-#	bluez
-#	home-manager
-#	zsh-autosuggestions
-  #];
 
   fonts.packages = with pkgs; [
  	font-awesome
