@@ -14,19 +14,33 @@
 
 // positions generated based on config.ctl //
 
-	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/cliphist","custom/wbar","custom/theme","custom/wallchange","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","","custom/padd"],
+
+	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/cliphist","custom/wbar","custom/theme","custom/wallchange","custom/wl-gammarelay-temperature","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","clock","custom/r_end","custom/padd"],
 	"modules-right": ["custom/padd","custom/l_end","tray","battery","custom/r_end","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","cpu", "memory", "temperature","custom/r_end","custom/padd", "custom/l_end", "custom/spotify","custom/notification","custom/r_end", "custom/padd"],
 
 
 // sourced from modules based on config.ctl //
 
+    "custom/wl-gammarelay-temperature": {
+    "format": "{} ",
+    "exec": "wl-gammarelay --subscribe Temperature",
+    "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
+    "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100"
+  },
+  "custom/wl-gammarelay-brightness": {
+    "format": "{} ",
+    "exec": "wl-gammarelay --subscribe Brightness",
+    "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d +0.02",
+    "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d -0.02"
+  },
+
     "custom/power": {
         "format": "{}",
         "rotate": 0,
         "exec": "echo ; echo  logout",
-        "on-click": "logoutlaunch.sh 2",
-        "on-click-right": "logoutlaunch.sh 1",
+        "on-click": "wlogout",
+        //"on-click-right": "logoutlaunch.sh 1",
         "interval" : 86400, // once every day
         "tooltip": true
     },
