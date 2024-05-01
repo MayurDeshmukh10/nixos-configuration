@@ -1,5 +1,15 @@
-{ inputs, config, pkgs, ...}: 
-{
+{config, pkgs, ...}: let
+  baseconfig = { allowUnfree = true; };
+  unstable = import <nixos-unstable> { config = baseconfig; };
+  #flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
+  #hyprland = (import flake-compat {
+  #  src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
+  #}).defaultNix;
+in {
+#	  imports = [
+  #  		hyprland.nixosModules.default
+ #	 ];
+
 
 	# configuration.nix
   	#nix.settings = {
@@ -9,9 +19,10 @@
 
   	programs.hyprland = {
 		enable = true;
+		enableNvidiaPatches = true;
 		#nvidiaPatches = true;
 		xwayland.enable = true;
-		package = pkgs.inputs.hyprland.packages.${pkgs.system}.hyprland;
+#		package = hyprland.packages.${pkgs.system}.default;
 	};
 
 	services.greetd = {
@@ -30,9 +41,12 @@
 
 	
 	environment.systemPackages = with pkgs; [
+		#unstable.hyprland
 		hyprpaper
+		xdg-desktop-portal-gtk
+		xdg-desktop-portal-hyprland
 		rofi-wayland
-		waybar
+		unstable.waybar
 		#dunst
 		libnotify
 		networkmanagerapplet
@@ -41,8 +55,14 @@
 		slurp
 		grim
 		wl-clipboard
-		#hyprlock
+		unstable.hyprlock
 		wlsunset
+		unstable.nh
+		unstable.hypridle	
+		unstable.cliphist
+		unstable.hyprshade 
+		qt6.qtwayland
+		libsForQt5.qt5.qtwayland
 
 		(waybar.overrideAttrs (oldAttrs: {
 			mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
@@ -51,10 +71,18 @@
 	];
 
 	hardware = {
-		opengl.enable = true;
+		#opengl.enable = true;
 		
 		nvidia.modesetting.enable = true;
 	};
+
+	hardware.opengl = {
+     		enable = true;
+     		extraPackages = with pkgs; [
+       			libGL
+     		];
+     		setLdLibraryPath = true;
+   	};
 
 	#environment.systemPackages = [
 	#	(pkgs.waybar.overrideAttrs (oldAttrs: {
@@ -64,6 +92,7 @@
 	#];
 
 	xdg.portal.enable = true;
+	xdg.portal.wlr.enable = true;
 	xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
 	
