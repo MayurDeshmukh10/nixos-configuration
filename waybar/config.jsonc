@@ -15,8 +15,8 @@
 // positions generated based on config.ctl //
 
 
-	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/cliphist","custom/wbar","custom/theme","custom/wallchange","custom/wl-gammarelay-temperature","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify","custom/r_end","","custom/padd"],
-	"modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","clock","custom/r_end","custom/padd"],
+	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/cliphist","custom/wbar","custom/theme","custom/wallchange","custom/wl-gammarelay-temperature","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify", "hyprland/window","custom/r_end","","custom/padd"],
+	"modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","clock","idle_inhibitor", "custom/r_end","custom/padd"],
 	"modules-right": ["custom/padd","custom/l_end","tray","battery","custom/r_end","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","cpu", "memory", "temperature","custom/r_end","custom/padd", "custom/l_end", "custom/spotify","custom/notification","custom/r_end", "custom/padd"],
 
 
@@ -54,6 +54,11 @@
         "on-click-middle": "sleep 0.1 && cliphist.sh w",
         "interval" : 86400, // once every day
         "tooltip": true
+    },
+
+    "hyprland/window": {
+    "max-length": 200,
+    "separate-outputs": true
     },
 
     "custom/wbar": {
@@ -217,7 +222,7 @@
     "pulseaudio": {
         "format": "{icon} {volume}",
         "rotate": 0,
-        "format-muted": "婢",
+        "format-muted": "Mute",
         "on-click": "pavucontrol -t 3",
         "on-click-middle": "volumecontrol.sh -o m",
         "on-scroll-up": "volumecontrol.sh -o i",
@@ -281,7 +286,7 @@
 	"sort-by-number": false,
 	"on-click": "activate",
 	"all-outputs": false,
-	"format-icons": {
+	/*"format-icons": {
     		"1": "",
     		"2": "",
     		"3": "",
@@ -294,7 +299,7 @@
     		"10": "",
     		"11": "󰅨",
     		"12": ""
-	}
+	}*/
    },
 
    "cpu": {
