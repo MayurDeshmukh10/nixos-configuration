@@ -86,6 +86,11 @@ programs.zsh = {
     packages_stable = "sudo vi /etc/nixos/software/packages.nix";
     packages_unstable = "sudo vi /etc/nixos/software/unstable.nix";
     ml-env = "source ~/machine-learning-env/bin/activate";
+    c_env = "nix-shell ~/Documents/nixos-configuration/development-environments/c_c++/shell.nix";
+    cbclear = "cliphist wipe";
+    work = "cd ~/Documents/SS_24";
+    pi = "ssh mayur@192.168.178.105";
+    status = "git status";
   };
   history.size = 10000;
   history.path = "${config.xdg.dataHome}/zsh/history";
