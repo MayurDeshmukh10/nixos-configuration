@@ -13,17 +13,14 @@
       ./software/dev-packages.nix
       ./software/hyprland.nix
       ./software/firefox.nix
+      ./software/gaming.nix
+      #./software/dropbox.nix
+      #./software/eduroam.nix
       ./hardware/bluetooth.nix
       ./hardware/sound.nix
       ./hardware/nvidia-configuration.nix
+      ./hardware/power-saving.nix
     ];
-	
- #programs.hyprland = {
-#		enable = true;
-#		nvidiaPatches = true;
-#		xwayland.enable = true;
-#		#package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-#	};
 
   #catppuccin.flavour = "mocha";
  #programs.firefox = {
@@ -33,7 +30,31 @@
      #pkgs.firefoxpwa
     #];
   #};
-  # Bootloader.
+
+  fileSystems."/nix" = {
+     device = "/dev/disk/by-label/nix";
+     fsType = "ext4";
+     neededForBoot = true;
+     options = [ "noatime" ];
+  };
+  nix.settings = {
+    		substituters = ["https://hyprland.cachix.org"];
+    		trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };	
+
+  # Storage Optimization
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "22:00" ];
+  nix.gc = {
+   automatic = true;
+   dates = "weekly";
+   options = "--delete-older-than 5d";
+  };
+
+  # flatpak
+  services.flatpak.enable = true;
+  
+# Bootloader.
   #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
@@ -43,7 +64,8 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8"]; 
+  #[ "1.1.1.1" "8.8.8.8" ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -52,6 +74,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.scanRandMacAddress = false;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -76,7 +99,7 @@
   #boot.kernelParams = [ "module_blacklist=i915" ];
   
   # logind
-  services.logind.powerKey = "suspend";
+  #services.logind.powerKey = "suspend";
   services.logind.powerKeyLongPress = "poweroff";
 
   # Enable the X11 windowing system.
@@ -125,6 +148,7 @@
     packages = with pkgs; [
       firefox
       kate
+      git
     #  thunderbird
     ];
   };

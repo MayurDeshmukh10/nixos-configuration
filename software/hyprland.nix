@@ -1,10 +1,14 @@
 {config, pkgs, ...}: let
   baseconfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseconfig; };
-  #flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
-  #hyprland = (import flake-compat {
-  #  src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
-  #}).defaultNix;
+  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
+  hyprland = (import flake-compat {
+    # we're not using pkgs.fetchgit as that requires a hash to be provided
+    src = builtins.fetchGit {
+      url = "https://github.com/hyprwm/Hyprland.git";
+      submodules = true;
+    };
+  }).defaultNix;
 in {
 #	  imports = [
   #  		hyprland.nixosModules.default
@@ -12,17 +16,17 @@ in {
 
 
 	# configuration.nix
-  	#nix.settings = {
-    	#	substituters = ["https://hyprland.cachix.org"];
-    	#	trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  	#};	
+  	nix.settings = {
+    		substituters = ["https://hyprland.cachix.org"];
+    		trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  	};	
 
   	programs.hyprland = {
 		enable = true;
-		enableNvidiaPatches = true;
+		#enableNvidiaPatches = true;
 		#nvidiaPatches = true;
 		xwayland.enable = true;
-#		package = hyprland.packages.${pkgs.system}.default;
+		package = hyprland.packages.${pkgs.system}.hyprland;
 	};
 
 	services.greetd = {
@@ -63,6 +67,10 @@ in {
 		unstable.hyprshade 
 		qt6.qtwayland
 		libsForQt5.qt5.qtwayland
+		unstable.pyprland
+		unstable.hyprlang
+		unstable.hyprcursor
+		phinger-cursors
 
 		(waybar.overrideAttrs (oldAttrs: {
 			mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
@@ -78,6 +86,8 @@ in {
 
 	hardware.opengl = {
      		enable = true;
+		driSupport = true;
+		driSupport32Bit = true;
      		extraPackages = with pkgs; [
        			libGL
      		];

@@ -6,7 +6,7 @@
         vim
         google-chrome
         thunderbird
-        spotify
+        #spotify
         htop
         nvtop-nvidia
         appimage-run
@@ -20,7 +20,7 @@
         bluez
         home-manager
         zsh-autosuggestions
-	todoist-electron
+	#todoist-electron
 	#discord
 	shotwell
 	tev
@@ -49,7 +49,21 @@
 	unzip
 	ffmpeg_5-full
 	udiskie # Removable disk automounter
-
+	stow
+	polkit
+	cacert
+	ranger
+	usbimager
+	vdirsyncer # sync google calender
+	cmatrix
+	texstudio
+	zotero
+	libsForQt5.kcalc
+	powertop
+	wget
+	socat
+	gparted
+	inetutils
 
 	];
 }
