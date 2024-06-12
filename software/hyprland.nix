@@ -71,6 +71,8 @@ in {
 		unstable.hyprlang
 		unstable.hyprcursor
 		phinger-cursors
+		eww
+		rofi-calc		
 
 		(waybar.overrideAttrs (oldAttrs: {
 			mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];

@@ -12,6 +12,7 @@ in {
     unstable.catppuccin
     unstable.gnome.pomodoro
     unstable.texliveFull
+    unstable.spotify-player
     #unstable.dropbox-cli
     #unstable.dropbox
 

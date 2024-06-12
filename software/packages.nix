@@ -64,6 +64,14 @@
 	socat
 	gparted
 	inetutils
+	glib
+	dbus-glib
+	#ocamlPackages.ssl
+	pkg-config
+	openssl
+	pantheon.epiphany
+	cozy # audiobook player
+	ventoy-full
 
 	];
 }
