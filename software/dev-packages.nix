@@ -7,5 +7,13 @@ in {
 	jdk
 	python3
 	python311Packages.pip
+	util-linux
+    	m4
+    	gperf
+    	cudatoolkit
+	ncurses5
+    	stdenv.cc
+    	binutils
+	libGLU libGL
   ];
 }

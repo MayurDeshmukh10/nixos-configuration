@@ -1,4 +1,4 @@
-{config, pkgs, ...}: let
+{config, pkgs, lib,...}: let
   baseconfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseconfig; };
   flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
@@ -21,16 +21,18 @@ in {
     		trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   	};	
 
+        programs.hyprland.enable = lib.mkDefault true;
+
   	programs.hyprland = {
-		enable = true;
 		#enableNvidiaPatches = true;
 		#nvidiaPatches = true;
 		xwayland.enable = true;
 		package = hyprland.packages.${pkgs.system}.hyprland;
 	};
 
+	services.greetd.enable = lib.mkDefault true;
+
 	services.greetd = {
-		enable = true;
 		settings = {
 			default_session = {
 

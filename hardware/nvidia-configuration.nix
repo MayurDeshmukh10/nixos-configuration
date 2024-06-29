@@ -24,7 +24,7 @@
     		# https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
     		# Only available from driver 515.43.04+
     		# Currently alpha-quality/buggy, so false is currently the recommended setting.
-    		open = false;
+    		open = true;
 
     		# Enable the Nvidia settings menu,
 		# accessible via `nvidia-settings`.
@@ -36,12 +36,12 @@
 
 	hardware.nvidia.prime = {
 
-		#sync.enable = true;
+		sync.enable = true;
 
-		offload = {
-			enable = true;
-			enableOffloadCmd = true;
-		};
+		#offload = {
+		#	enable = true;
+		#	enableOffloadCmd = true;
+		#};
 		# Make sure to use the correct Bus ID values for your system!
 		intelBusId = "PCI:0:2:0";
 		nvidiaBusId = "PCI:1:0:0";

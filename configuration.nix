@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib,... }:
 
 {
   imports =
@@ -14,7 +14,7 @@
       ./software/hyprland.nix
       ./software/firefox.nix
       ./software/gaming.nix
-      #./software/dropbox.nix
+      ./software/specializations.nix
       #./software/eduroam.nix
       ./hardware/bluetooth.nix
       ./hardware/sound.nix
@@ -64,7 +64,7 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8"]; 
+  #networking.nameservers = [ "1.1.1.1" "8.8.8.8"]; 
   #[ "1.1.1.1" "8.8.8.8" ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -74,7 +74,9 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.networkmanager.wifi.scanRandMacAddress = false;
+  networking.networkmanager.wifi.scanRandMacAddress = true;
+  networking.networkmanager.wifi.powersave = false;
+  networking.wireless.scanOnLowSignal = false;
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -103,13 +105,13 @@
   services.logind.powerKeyLongPress = "poweroff";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = false;
+  services.xserver.enable = lib.mkDefault false;
 
   services.xserver.videoDrivers = ["nvidia"];
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = false;
-  services.xserver.desktopManager.plasma5.enable = false;
+  services.xserver.displayManager.sddm.enable = lib.mkDefault false;
+  services.xserver.desktopManager.plasma5.enable = lib.mkDefault false;
 
   # Configure keymap in X11
   services.xserver = {

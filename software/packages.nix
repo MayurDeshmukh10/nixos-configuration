@@ -69,9 +69,21 @@
 	#ocamlPackages.ssl
 	pkg-config
 	openssl
-	pantheon.epiphany
 	cozy # audiobook player
 	ventoy-full
-
+	audible-cli
+	insomnia
+	tlrc
+	libreoffice-qt6-fresh
+	virt-manager
+	libvirt
+	qemu
+	xorg.xhost
+	nix-output-monitor
+	kdePackages.kdeconnect-kde
+	insync-nautilus
+	python311Packages.conda
+	tuxmux
+	cudaPackages_12_2.cudatoolkit
 	];
 }
