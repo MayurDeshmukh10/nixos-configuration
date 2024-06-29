@@ -15,7 +15,7 @@
 // positions generated based on config.ctl //
 
 
-	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/cliphist","custom/wbar","custom/theme","custom/wallchange","custom/wl-gammarelay-temperature","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify", "hyprland/window","custom/r_end","","custom/padd"],
+	"modules-left": ["custom/padd","custom/l_end","custom/power","custom/r_end","custom/l_end","wlr/taskbar","custom/spotify", "hyprland/window","custom/r_end","","custom/padd"],
 	"modules-center": ["custom/padd","custom/l_end","hyprland/workspaces","clock","idle_inhibitor", "custom/r_end","custom/padd"],
 	"modules-right": ["custom/padd","custom/l_end","tray","battery","custom/r_end","custom/l_end","backlight","network","bluetooth","pulseaudio","pulseaudio#microphone","cpu", "memory", "temperature","custom/r_end","custom/padd", "custom/l_end", "custom/spotify","custom/notification","custom/r_end", "custom/padd"],
 

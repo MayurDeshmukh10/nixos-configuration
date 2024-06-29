@@ -23,5 +23,12 @@ waybar &
 #dunst
 swaync
 
+pypr
 # hypridle
 #hypridle &
+
+
+#[workspace 1 silent] kitty
+#[workspace 2 silent] thunderbird
+#[workspace 3 silent] firefox
+

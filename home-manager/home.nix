@@ -68,8 +68,20 @@ programs.zsh = {
   enableAutosuggestions = true;
   syntaxHighlighting.enable = true;
 
-
-  oh-my-zsh = {
+  #plugins = [
+  #    {
+  #      name = "zsh-nix-shell";
+  #      file = "nix-shell.plugin.zsh";
+  #      src = pkgs.fetchFromGitHub {
+  #        owner = "chisui";
+  #        repo = "zsh-nix-shell";
+  #        rev = "v0.8.0";
+  #        sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+  #      };
+  #    }
+  #];
+  
+oh-my-zsh = {
     enable = true;
     plugins = [ "git" ];
     theme = "robbyrussell";
@@ -77,20 +89,23 @@ programs.zsh = {
 
   shellAliases = {
     ll = "ls -l";
-    rebuild_system = "sudo nixos-rebuild switch";
+    rebuild_system = "sudo nixos-rebuild switch --log-format internal-json -v |& nom --json";
     rebuild_home = "home-manager switch";
     system_config = "sudo vi /etc/nixos/configuration.nix";
     home_config = "vi /home/mayur/.config/home-manager/home.nix";
     hl_config = "vi /home/mayur/.config/hypr/hyprland.conf";
-    update_packages = "sudo nixos-rebuild switch --upgrade";
+    update_packages = "sudo nixos-rebuild switch --upgrade --log-format internal-json -v |& nom --json";
     packages_stable = "sudo vi /etc/nixos/software/packages.nix";
     packages_unstable = "sudo vi /etc/nixos/software/unstable.nix";
+    instant_cleanup = "nix-store --optimise && sudo nix-collect-garbage -d"; 
     ml-env = "source ~/machine-learning-env/bin/activate";
     c_env = "nix-shell ~/Documents/nixos-configuration/development-environments/c_c++/shell.nix";
+    rust_env = "nix-shell ~/Documents/nixos-configuration/development-environments/rust/shell.nix";
     cbclear = "cliphist wipe";
     work = "cd ~/Documents/SS_24";
     pi = "ssh mayur@192.168.178.105";
     status = "git status";
+    gparted = "xhost +SI:localuser:root && sudo gparted";
   };
   history.size = 10000;
   history.path = "${config.xdg.dataHome}/zsh/history";
@@ -109,6 +124,7 @@ programs.zsh = {
   #
   home.sessionVariables = {
     LD_LIBRARY_PATH= "$LD_LIBRARY:/nix/store/2zm8zhdjvf63vchky28z8z0s2c39acgw-glib-2.78.4/lib";
+    TERM="vt100";
   };
 
   # Let Home Manager install and manage itself.
