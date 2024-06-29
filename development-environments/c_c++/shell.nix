@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation {
     getopt
     flex
     bison
-    gcc
+    gcc13
     gnumake
     bc
     pkg-config
